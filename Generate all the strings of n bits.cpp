@@ -17,7 +17,7 @@
 #define ld long double
 using namespace std;
 ll n, m;
-int arr[11];
+int arr[n];
 ll mx = 0;
 void  generate(int i) {
 	// base case this is condition stop the recursion

@@ -41,7 +41,7 @@ int main()
 		
 		cin >> n;
 		m = n;
-		
+		// the middle element
 		//binary search on answer 
 		ll l = 1, r = n * m, mid, ans = -1;
 		while (l <= r) {

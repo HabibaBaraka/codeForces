@@ -1,0 +1,55 @@
+/*
+								  "??? ??? ?????"
+			  * ??????? ??????????? ??? ?????? ????? ?????? ??? ???????????? ? ??????? ????? ?????????? ?????????? *
+*/
+// BIT MASKS
+#include<vector>
+#include <iostream>
+#include<map>
+#include<algorithm>
+//#include<bit>
+#define ll long long
+#define ld long double
+using namespace std;
+ll mod = 1e9 + 7;
+ll fast_power(ll base, ll p) {
+	ll res = 1;
+	while (p != 0) {
+		if (p % 2 == 0) {
+			p /= 2;
+			base *= base;   //base *= base%mod can ignore it already mod
+			base %= mod;
+		}
+		else {
+			p--;
+			res *= base % mod;
+			res %= mod;
+		}
+	}
+	return res;
+}
+
+int main() {
+
+	int t = 1; cin >> t;
+	while (t--) {
+		int n, k; cin >> n >> k;
+		ll ans = 1;
+		//2 pow k for eg:- k =2 so => 4 => 4-1 =>the biggest number in this range has  0 1 1 2 bits note that ones equal k and I have n elements 
+		// 0 1 1
+		// 0 1 1
+		// 0 1 1
+		// number of choices is equal to n for every k (coloum)
+		//  summary ???????? (Combinations - ??????????)
+		// n*n*n ... kth
+		// so ans is n pow k
+		// 
+		while (k--) {
+			ans *= n % mod;
+			ans %= mod;
+		}
+
+		cout << ans;
+		cout << '\n';
+	}
+}

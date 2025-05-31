@@ -1,57 +1,76 @@
+/*
+          "صلي على النبي"
+    * قَالُوا سُبْحَانَكَ لَا عِلْمَ لَنَا إِلَّا مَا عَلَّمْتَنَا  إِنَّكَ أَنتَ الْعَلِيمُ الْحَكِيمُ *
+*/
 #include<vector>
 #include <iostream>
-#include<unordered_map>
-#include<algorithm>
-#include<cmath>
-#include<stack>
-#include<map>
-#include <unordered_set>
-#include<numeric>
+#include<climits>
 #include<string>
-#include<queue>
+#include<algorithm>
+#include<map>
+#include<cmath>
+#include<bitset>
 #include<set>
+#include<unordered_map>
+#include<unordered_set>
+#include<iomanip>
+#include<stack>
+#include<queue>
+using namespace std;
+#define ll long long
+#define ld long double
 #define Y "YES"
 #define O "NO"
 #define el cout<<endl;
-#define ll long long
-#define ld long double
-using namespace std;
+#define ON(n, k) ((n) | (1 << (k)))
+#define OFF(n, k) ((n) & ~(1 << (k)))
+#define mod = 1e9 + 7;
+#define N 100005
 
 int main()
+
 {
-	int t = 1;
-	cin >> t;
-	while (t--) {
 
-		ll n,h;
-		cin >> n>>h;
-		vector<ll>v(n);
-		for (int i = 0; i < n; i++)cin >> v[i];
-		sort(v.begin(), v.end());
-		int a[3]= { 2, 2, 3 };
-		int mx = 0;
-		do {
-			int j = 0;
-			ll hh = h;
-			int cnt = 0;
-			for (int i = 0; i < n; i++) {
+    //pre();
+    //freopen("divisible.in", "r", stdin);
+    ios_base::sync_with_stdio(0); cout.tie(0), cin.tie(0);
+    int t = 1;
+    cin >> t;
+    //SPF();
+    while (t--) {
+       
+        int n, k;
+        cin >> n >> k;
 
-				while (j < 3 && hh <= v[i]) {
-					hh *= a[j];
-					j++;
-					
-				}
-				if (hh > v[i]) {
-					hh += v[i] / 2;
-					cnt++;
-				}
-					
-				
-			}
-			mx = max(mx, cnt);
-		} while (next_permutation(a,a+3));
-		cout << mx;
-		
-		el;
-	}
+        vector<ll>v(n);
+        
+        for (auto& it : v)cin >> it;
+       // sort(v.begin(), v.end());
+        vector<int>p = { 2,2,3 };
+        int mx = 0;
+        do
+        {
+            int i = 0;
+            int cnt = 0;
+            ll x = k;
+            for (auto it : v)
+            {
+                while (x <= it&&i<3)
+                {
+                   x *= p[i];
+                   i++;
+                }
+                if (x > it)
+                {
+                    x += it / 2;
+                    cnt++;
+                }
+                
+            }
+            mx = max(mx, cnt);
+        } while (next_permutation(p.begin(), p.end()));
+        
+        cout << mx;
+        el;
+    }
 }

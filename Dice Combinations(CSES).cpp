@@ -43,6 +43,23 @@ ll dice(ll s = n)
 	}
 	return ret;
 }
+ll dice2(ll s = 0)
+{
+	// base case 
+	if (s > n)return  0;
+	if (s == n)return 1;
+	ll& ret = dp[s];
+	if (ret != -1)return ret;
+	// transition 
+	ret = 0;
+	for (int i = 1; i <= 6; i++)
+	{
+		ret += dice2(s + i) % mod;
+		ret %= mod;
+	}
+	return ret;
+}
+
 int main()
 {
 	//freopen("input.txt", "r", stdin);    

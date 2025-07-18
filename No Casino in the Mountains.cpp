@@ -40,40 +40,28 @@ int main()
 	{
 		int n, k;
 		cin >> n >> k;
-		vector<int>v(n),pre(n+1);
+		vector<int>v(n),nx(n,n);
 		for (auto& it : v)cin >> it;
-		int st = -1;
-		for (int i = 0; i < n; i++)
+		for (int i = n - 1; i >= 0; i--)
 		{
-			pre[i+1] = pre[i] + v[i];
-		}
-		for (int i = 0; i < n; i++)
-		{
-			if (i + k < n && (pre[i + k] - pre[i] ==0))
-			{
-				st = i;
-				break;
-			}
-
-		}
-		if (st == -1)cout << 0;
-		else
-		{
-			int cnt = 0;
-			for (int i = st; i < n; i++)
-			{
-				if (i + k <= n && (pre[i + k] - pre[i] == 0))
-				{
-					
-					cnt++;
-					i += k ;
-					
-					
-				}
-			}
-			cout << cnt;
+			if (i == n - 1 && v[i] == 0)continue;
+			if (v[i] == 1)nx[i] = i;
+			else nx[i] = nx[i + 1];
 		}
 		
+		int cnt = 0;
+		for (int i = 0; i <= n-k; i++)
+		{
+			if (v[i] == 0)
+			{
+				if (nx[i] >= i + k)
+				{
+					cnt++;
+					i += k;
+		        }
+			}
+		}
+		cout << cnt;
 		el;
 	}
 }

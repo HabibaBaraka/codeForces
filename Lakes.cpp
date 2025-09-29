@@ -1,0 +1,93 @@
+/*
+	The Cow (2:28)
+
+كَيْفَ تَكْفُرُونَ بِٱللَّهِ وَكُنتُمْ أَمْوَٰتًۭا فَأَحْيَـٰكُمْ ۖ ثُمَّ يُمِيتُكُمْ ثُمَّ يُحْيِيكُمْ ثُمَّ إِلَيْهِ تُرْجَعُونَ ٢٨
+
+How can you deny Allah? You were lifeless and He gave you life,
+then He will cause you to die and again bring you to life,
+and then to Him you will ˹all˺ be returned.
+*/
+#include<vector>
+#include <iostream>
+#include<climits>
+#include<string>
+#include<algorithm>
+#include<iomanip>
+#include<cmath>
+#include<queue>
+#include<map>
+#include<unordered_map>
+#include<unordered_set>
+#include<set>
+#include<numeric>
+using namespace std;
+#define ll long long
+#define ld long double
+#define Y "YES\n"
+#define O "NO\n"
+#define el cout<<'\n';
+#define B_ct(n) __builtin_popcountll(n)
+const ll  mod = 998244353;
+#define gr vector<vector<int>>
+const int dx[] = { 0,0,-1,1,-1,1,1,-1 };
+const int dy[] = { 1,-1,0,0 ,-1,1,-1,1 };
+const char dir[] = { 'R','L','F','D' };
+const int N = 3000;
+bool vis[N][N];
+int a[N][N];
+int n, m;
+bool valid(int i, int j)
+{
+	return i >= 0 && i < n && j >= 0 && j < m && !vis[i][j] && a[i][j]>0;
+}
+ll dfs(int i = 0, int j = 0)
+{
+	vis[i][j] = 1;
+	ll sum = a[i][j];
+	
+	for (int o = 0; o < 4; o++)
+	{
+		int nx = i + dx[o];
+		int ny = j + dy[o];
+		if (valid(nx, ny))
+		{
+			sum += dfs(nx,ny);
+		}
+	
+	}
+	
+	return sum;
+}
+int main()
+{
+	ios_base::sync_with_stdio(0);
+	cin.tie(0), cout.tie(0);
+
+	int tc = 1;
+	cin >> tc;
+	while (tc--)
+	{
+		cin >> n >> m;
+		
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+			{
+				cin >> a[i][j];
+				vis[i][j] = 0;
+			}
+
+		}
+		ll mx = 0;
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+			{
+				if (valid(i,j))mx=max(mx,dfs(i, j));
+			}
+		}
+		cout << mx;
+		el
+	}
+	return 0;
+}
